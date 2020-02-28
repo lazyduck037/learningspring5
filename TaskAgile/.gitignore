@@ -29,3 +29,6 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/main/resources/templates/
+/src/main/resources/static/js/
+/src/main/resources/static/favicon.ico
