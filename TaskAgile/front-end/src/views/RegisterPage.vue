@@ -6,18 +6,19 @@
           <img class="logo" src="/static/images/logo.png">
           <div class="tagline">Open source task management tool</div>
         </div>
-        <form>
+        <form @submit.prevent="submitForm">
+          <div v-show="errorMessage" class="alert alert-danger failed">{{errorMessage}}</div>
           <div class="form-group">
             <label>Username</label>
-            <input type="text" class="form-control" id="username" value="">
+            <input type="text" class="form-control" id="username" value="" v-model="form.username">
           </div>
           <div class="form-group">
             <label>Email address</label>
-            <input type="email" class="form-control" id="emailAddress" value="">
+            <input type="email" class="form-control" id="emailAddress" value="" v-model="form.emailAddress">
           </div>
           <div class="form-group">
             <label>Password</label>
-            <input type="password" class="form-control" id="password" value="">
+            <input type="password" class="form-control" id="password" value="" v-model="form.password">
           </div>
           <button type="submit" class="btn btn-primary btn-block">Create account</button>
         </form>
@@ -36,3 +37,28 @@
   .logo-wrapper {margin-bottom: 40px}
   .footer {width: 100%; line-height: 40px; margin-top: 50px;}
 </style>
+<script>
+import registrationService from '../services/registration'
+export default {
+  name: 'RegisterPage',
+  data: function () {
+    return {
+      form: {
+        username: '',
+        emailAddress: '',
+        password: ''
+      },
+      errorMessage: ''
+    }
+  },
+  methods: {
+    submitForm () {
+      registrationService.register(this.form).then(() => {
+        this.$router.push({ name: 'LoginPage' })
+      }).catch((error) => {
+        this.errorMessage = 'Failed to register user. Reason ' + (error.message ? error.message : 'Unknown') + '.'
+      })
+    }
+  }
+}
+</script>
