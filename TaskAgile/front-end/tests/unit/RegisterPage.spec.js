@@ -2,11 +2,13 @@ import { mount, createLocalVue } from '@vue/test-utils'
 import RegisterPage from '@/views/RegisterPage'
 import VueRouter from 'vue-router'
 import registrationService from '@/services/registration'
+import Vuelidate from 'vuelidate'
 
 const localVue = createLocalVue()
 const router = new VueRouter()
 
 localVue.use(VueRouter)
+localVue.use(Vuelidate)
 
 //mock dependency registrationService
 jest.mock('@/services/registration')
@@ -31,7 +33,7 @@ describe('RegisterPage.vue',()=> {
       registerSpy = jest.spyOn(registrationService, 'register')
     })
 
-  afterAll(()=>{
+  afterEach(()=>{
     jest.restoreAllMocks()
     registerSpy.mockReset()
     registerSpy.mockRestore()
@@ -76,8 +78,8 @@ describe('RegisterPage.vue',()=> {
     const stub = jest.fn()
     wrapper.vm.$router.push = stub
     wrapper.vm.form.username = 'sunny'
-    wrapper.vm.form.emailAddress = 'sunny@local'
-    wrapper.vm.form.password = 'Jest!'
+    wrapper.vm.form.emailAddress = 'sunny@taskagile.com'
+    wrapper.vm.form.password = 'JestRocks!'
     wrapper.vm.submitForm()
     expect(registerSpy).toBeCalled()
     await wrapper.vm.$nextTick()
@@ -87,12 +89,22 @@ describe('RegisterPage.vue',()=> {
 
   it('should fail it is not a new user',async ()=>{
     //in the mock, only sunny@local is new user
-    wrapper.vm.form.emailAddress = 'ted@local'
+    wrapper.vm.form.username = 'ted'
+    wrapper.vm.form.emailAddress = 'ted@local.com'
+    wrapper.vm.form.password = 'JestRocks!'
     wrapper.vm.submitForm()
     expect(registerSpy).toBeCalled()
     await wrapper.vm.$nextTick()
     expect(wrapper.find('.failed').isVisible()).toBe(true)
 
+  })
+
+  it('should fail when the email address is invalid', () => {
+    wrapper.vm.form.username = ''
+    wrapper.vm.form.emailAddress = 'bad-email-add'
+    wrapper.vm.form.password = 'JestRocks!'
+    wrapper.vm.submitForm()
+    expect(registerSpy).not.toHaveBeenCalled()
   })
 
 })
