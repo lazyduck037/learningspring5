@@ -1,5 +1,7 @@
 package com.taskagile.web.payload;
 
+import com.taskagile.domain.application.commands.RegistrationCommand;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,6 +20,10 @@ public class RegistrationPayload {
     @Size(min = 6, max = 30, message = "Password must be between 6 and 30 characters")
     @NotNull
     private String password;
+
+    public RegistrationCommand toCommand(){
+        return new RegistrationCommand(username, emailAddress, password);
+    }
 
     public String getUsername() {
         return username;
