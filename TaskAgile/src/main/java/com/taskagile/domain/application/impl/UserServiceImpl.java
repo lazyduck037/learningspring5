@@ -39,6 +39,6 @@ public class UserServiceImpl implements UserService {
     }
 
     private void sendWelcomeMessage(User user) {
-        mailManager.send(user.getUsername(), "Welcome to TaskAgile", "Welcome.ftl", MessageVariable.from("user", user));
+        mailManager.send(user.getEmailAddress(), "Welcome to TaskAgile", "Welcome.ftl", MessageVariable.from("user", user));
     }
 }

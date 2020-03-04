@@ -81,4 +81,24 @@ public class User extends AbstractBaseEntity {
     public String getPassword(){
         return password;
     }
+
+    public String getEmailAddress(){
+        return emailAddress;
+    }
+
+    public String getFirstName(){
+        return firstName;
+    }
+
+    public String getLastName(){
+        return lastName;
+    }
+
+    public Date getCreatedDate(){
+        return createdDate;
+    }
+
+    public Long getId(){
+        return id;
+    }
 }
