@@ -78,6 +78,11 @@ public class User extends AbstractBaseEntity {
         return username;
     }
 
+    public void updateName(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public String getPassword(){
         return password;
     }

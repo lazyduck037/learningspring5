@@ -13,9 +13,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 class TaskAgileApplicationTests {
 
-	@Test
-	void contextLoads() {
-		Assert.assertEquals(true, true);
-	}
+//	@Test
+//	void contextLoads() {
+//		Assert.assertEquals(true, true);
+//	}
 
 }
