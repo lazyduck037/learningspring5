@@ -1,6 +1,7 @@
+
 export default {
-  authenticate(detail) {
-    return new Promise((error, reject)=>{
+  authenticate (detail) {
+    return new Promise((resolve, reject) => {
       (detail.username === 'sunny' || detail.username === 'sunny@taskagile.com') &&
       detail.password === 'JestRocks!'
         ? resolve({result: 'success'})

@@ -53,7 +53,7 @@ describe('services/authentication',()=>{
 
     })
     return authenticationService.authenticate().catch(error => {
-      expect(error.response.data.message).toEqual('Bad request')
+      expect(error.message).toEqual('Bad request')
     })
 
   })
