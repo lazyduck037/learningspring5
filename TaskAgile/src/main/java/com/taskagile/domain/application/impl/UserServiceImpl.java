@@ -8,7 +8,6 @@ import com.taskagile.domain.common.mail.MessageVariable;
 import com.taskagile.domain.model.user.*;
 import com.taskagile.domain.model.user.events.UserRegisteredEvent;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -33,6 +32,11 @@ public class UserServiceImpl implements UserService {
         this.domainEventPublisher = domainEventPublisher;
         this.mailManager = mailManager;
         this.userRepository = userRepository;
+    }
+
+    @Override
+    public User findById(UserId userId) {
+        return userRepository.findById(userId);
     }
 
     @Override

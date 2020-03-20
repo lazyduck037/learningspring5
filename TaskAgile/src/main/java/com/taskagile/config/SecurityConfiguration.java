@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -23,20 +25,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .authorizeRequests()
-                .antMatchers(PUBLIC).permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .addFilterAt(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .formLogin()
-                .loginPage("/login")
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessHandler(logoutSuccessHandler())
-                .logoutSuccessUrl("/login?logged-out")
-                .and()
-                .csrf().disable();
+            .authorizeRequests()
+            .antMatchers(PUBLIC).permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .addFilterAt(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+            .formLogin()
+            .loginPage("/login")
+            .and()
+            .logout()
+            .logoutUrl("/logout")
+            .logoutSuccessHandler(logoutSuccessHandler())
+            .logoutSuccessUrl("/login?logged-out")
+            .and()
+            .csrf().disable();
     }
 
     @Override
@@ -56,6 +58,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler(){
         return new SimpleAuthenticationSuccessHandler();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean

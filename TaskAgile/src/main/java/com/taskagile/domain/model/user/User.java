@@ -83,6 +83,10 @@ public class User extends AbstractBaseEntity {
         this.lastName = lastName;
     }
 
+    public UserId getId() {
+        return new UserId(id);
+    }
+
     public String getPassword(){
         return password;
     }
@@ -103,7 +107,9 @@ public class User extends AbstractBaseEntity {
         return createdDate;
     }
 
-    public Long getId(){
-        return id;
+    public String getInitials() {
+        return "Username Init";//(firstName.substring(0, 1) + lastName.substring(0, 1)).toUpperCase();
     }
+
+
 }

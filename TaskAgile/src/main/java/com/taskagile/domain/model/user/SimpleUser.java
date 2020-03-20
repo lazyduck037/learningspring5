@@ -12,7 +12,7 @@ import java.util.Objects;
 public class SimpleUser implements UserDetails, Serializable {
     private static final long serialVersionUID = -7144174657188362966L;
 
-    private long userId;
+    private UserId userId;
     private String username;
     private String password;
 
@@ -20,6 +20,10 @@ public class SimpleUser implements UserDetails, Serializable {
         userId = user.getId();
         username = user.getUsername();
         password = user.getPassword();
+    }
+
+    public UserId getUserId() {
+        return userId;
     }
 
     @Override
@@ -44,7 +48,7 @@ public class SimpleUser implements UserDetails, Serializable {
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override

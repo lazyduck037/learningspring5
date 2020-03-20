@@ -54,35 +54,35 @@ export default {
     }
   },
   validations: {
-      form: {
-          username: {
-              required,
-              minLength: minLength(2),
-              maxLength: maxLength(50),
-              alphaNum
-          },
-          emailAddress: {
-              required,
-              email,
-              maxLength: maxLength(100)
-          },
-          password: {
-              required,
-              minLength: minLength(6),
-              maxLength: maxLength(100)
-          }
+    form: {
+      username: {
+        required,
+        minLength: minLength(2),
+        maxLength: maxLength(50),
+        alphaNum
+      },
+      emailAddress: {
+        required,
+        email,
+        maxLength: maxLength(100)
+      },
+      password: {
+        required,
+        minLength: minLength(6),
+        maxLength: maxLength(100)
       }
+    }
   },
   methods: {
-    submitForm() {
+    submitForm () {
       this.$v.$touch()
       if (this.$v.$invalid) {
-          return
+        return
       }
       registrationService.register(this.form).then(() => {
-          this.$router.push({ name: 'LoginPage' })
+        this.$router.push({ name: 'LoginPage' })
       }).catch((error) => {
-          this.errorMessage = 'Failed to register user. Reason ' + (error.message ? error.message : 'Unknown') + '.'
+        this.errorMessage = 'Failed to register user. Reason ' + (error.message ? error.message : 'Unknown') + '.'
       })
     }
   }

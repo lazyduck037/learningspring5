@@ -3,7 +3,7 @@ package com.taskagile.infrastructure.repository;
 import org.hibernate.Session;
 import javax.persistence.EntityManager;
 
-public abstract class HibernateSupport {
+public abstract class HibernateSupport<T> {
     EntityManager entityManager;
 
     HibernateSupport(EntityManager entityManager){
@@ -12,5 +12,10 @@ public abstract class HibernateSupport {
 
     Session getSession(){
         return entityManager.unwrap(Session.class);
+    }
+
+    public void save(T object) {
+        entityManager.persist(object);
+        entityManager.flush();
     }
 }

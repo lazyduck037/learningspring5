@@ -2,7 +2,6 @@ package com.taskagile.web.apis;
 
 import com.taskagile.domain.application.UserService;
 import com.taskagile.domain.model.user.EmailAddressExistsException;
-import com.taskagile.domain.model.user.RegistrationException;
 import com.taskagile.domain.model.user.UsernameExistsException;
 import com.taskagile.web.payload.RegistrationPayload;
 import com.taskagile.web.result.ApiResult;
@@ -39,4 +38,8 @@ public class RegistrationApiController {
         }
     }
 
+    @Controller
+    public static class CardListApiController {
+
+    }
 }

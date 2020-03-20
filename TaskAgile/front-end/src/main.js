@@ -3,9 +3,16 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
-import Vuelidate from 'vuelidate';
+import Vuelidate from 'vuelidate'
+import { i18n } from './i18n'
+import eventBus from './event-bus'
+import realTimeClient from '@/real-time-client'
 
 Vue.use(Vuelidate)
+Vue.config.productionTip = false
+Vue.prototype.$bus = eventBus
+Vue.prototype.$rt = realTimeClient
+
 Vue.config.productionTip = false
 
 axios.defaults.baseURL = '/api'
@@ -20,5 +27,6 @@ axios.interceptors.response.use(
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount('#app')
